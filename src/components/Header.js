@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom'
 
 const HeaderFixed = styled.header`
-  positions: fixed;
+  position: fixed;
   height: 5rem;
+  width: 100%;
+  background-color: #ecfcff;
   top: 0;
   left: 0;
   display: flex;
@@ -12,7 +15,7 @@ const HeaderFixed = styled.header`
   align-items: center;
 `;
 
-const MenuTag = styled.a`
+const MenuTag = styled(Link)`
   text-decoration: none;
   color: black;
   font-size: 1.5rem;
@@ -34,12 +37,12 @@ const Logo = styled.a`
 const Header = () => {
   return(
     <HeaderFixed>
-      <Logo href="#a">헤이비트 짝퉁 비슷한거</Logo>
+      <Logo href="#welcome">헤이비트 짝퉁 비슷한거</Logo>
       <nav>
-        <MenuTag href="#b">사이트 소개</MenuTag>
-        <MenuTag href="#c">투자전략</MenuTag>
-        <MenuTag href="#d">투자결과</MenuTag>
-        <MenuTag href="#e">만드는 과정</MenuTag>
+        <MenuTag to="#welcome">사이트 소개</MenuTag>
+        <MenuTag to="#quantLogic">투자전략</MenuTag>
+        <MenuTag to="#d">투자결과</MenuTag>
+        <MenuTag to="#e">만드는 과정</MenuTag>
       </nav>
     </HeaderFixed>
   )
