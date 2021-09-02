@@ -15,14 +15,13 @@ text-align: center;
 font-family: 'Do Hyeon', sans-serif;
 `;
 
-const Introduce = styled.p`
-  margin: 3rem;
-`;
-
 const QuantLogic = () => {
   return(
       <WelecomeView className="quantLogic">
-        <Introduce>알고리즘</Introduce>
+        <div>
+          <div>볼린저밴드</div>
+          <div>돈키언추세</div>
+        </div>
       </WelecomeView>
   )
 }
