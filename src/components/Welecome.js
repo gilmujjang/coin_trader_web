@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const WelecomeView = styled.div`
 color: black;
 width: 100vw;
-height: calc(100vh - 5rem);
+height: 100vh;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -33,6 +33,7 @@ const FlexBox = styled.div`
 
 const TextBox = styled.div`
   width: 32rem;
+  margin-top: 4rem;
 `;
 
 const LogoBox = styled.div`
@@ -49,7 +50,7 @@ const Welcome = () => {
         <FlexBox>
           <TextBox>
             <Text1>가상화폐 투자 봇</Text1>
-            <Text2>이 사이트는 가상화폐 투자 봇인 길무봇의 투자결과를 모니터링 하는 사이트 입니다</Text2>
+            <Text2>가상화폐 투자 봇인 길무봇의 투자결과를 모니터링 하는 사이트 입니다</Text2>
           </TextBox>
           <LogoBox>
             <BithumbLogo src="images/bithumb.png" alt="bithumb logo"/>

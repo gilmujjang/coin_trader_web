@@ -1,8 +1,8 @@
 import React from 'react';
 import Welcome from './Welecome'
 import QuantLogic from './QuantLogic';
-import Make from './Make';
 import Chart from './Chart';
+import GilmuIndex from './GilmuIndex';
 import styled from 'styled-components';
 
 // const BackgrondOdd = styled.div`
@@ -20,14 +20,12 @@ import styled from 'styled-components';
 const Main = () => {
   return(
     <div>
+      <GilmuIndex/>
       {/* <BackgrondOdd> */}
         <Welcome/>
       {/* </BackgrondOdd>
       <BackgrondEven> */}
         <QuantLogic/>
-      {/* </BackgrondEven>
-      <BackgrondOdd> */}
-        <Make/> 
       {/* </BackgrondOdd>
       <BackgrondEven> */}
         <Chart/>
