@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
+import { dbService } from '../fbase';
 
 const WelecomeView = styled.div`
 color: black;
@@ -27,6 +28,15 @@ const ChartImage = styled.img`
 `;
 
 const Chart = () => {
+
+  useEffect(() => {
+    dbService.collection("balance").orderBy("time", "desc").limit(3).get().then(snapshot  => {
+      snapshot.docs.map(doc => {
+        console.log(doc.data())
+      })
+    })
+  },[])
+
   return(
       <WelecomeView className="chart">
         <Title>차트</Title>
