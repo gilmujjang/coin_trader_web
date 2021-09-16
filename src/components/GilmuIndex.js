@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
+import { dbService } from '../fbase';
 
 const WelecomeView = styled.div`
 color: black;
@@ -33,7 +34,22 @@ const Index = styled.div`
 
 
 const GilmuIndex = () => {
-  const index = 106;
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(0);
+  useEffect(() => {
+    dbService.collection("balance").orderBy("time", "asc").limit(1).get().then(snapshot  => {
+      snapshot.docs.map(doc => {
+        setStart(doc.data().btc + doc.data().eth +doc.data().cash);
+      })
+    })
+    dbService.collection("balance").orderBy("time", "desc").limit(1).get().then(snapshot  => {
+      snapshot.docs.map(doc => {
+        setEnd(doc.data().btc + doc.data().eth +doc.data().cash);
+      })
+    })
+  },[])
+
+  const index = ((end/start)*100).toFixed(1)
   return(
       <WelecomeView className="welcome">
         <FlexBox>

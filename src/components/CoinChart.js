@@ -34,7 +34,7 @@ const ChartImage = styled.div`
 const Chart = () => {
   const [targetCoin, setTargetCoin] = useState('BTC');
   const [intervals, setIntervals] = useState('');
-  const [len, setLen] = useState(100);
+  const [len, setLen] = useState(30);
   const [coinPrice, setCoinPrice] = useState([]);
   const [coinMa, setCoinMa] = useState([]);
   const [coinUpper, setCoinUpper] = useState([]);
@@ -42,11 +42,11 @@ const Chart = () => {
   const [date, setDate] = useState([]);
 
   function Unix_timestamp(t){
-    var date = new Date(t);
-    var year = date.getFullYear();
-    var month = "0" + (date.getMonth()+1);
-    var day = "0" + date.getDate();
-    var hour = "0" + date.getHours();
+    const date = new Date(t);
+    const year = date.getFullYear();
+    const month = "0" + (date.getMonth()+1);
+    const day = "0" + date.getDate();
+    const hour = "0" + date.getHours();
     return year + "-" + month.substr(-2) + "-" + day.substr(-2) + " " + hour.substr(-2);
   }
 
@@ -70,10 +70,11 @@ const Chart = () => {
     let coin_upper_list = [];
     let coin_lower_list = [];
     let coin_date_list = [];
+    const initPrice = response_json["data"][n-length][2];
     for(let i=length; i>0; i--){
       const data = response_json["data"][n-i];
       const time = Unix_timestamp(Number(data[0]));
-      coin_pices_list.push(Number(data[2]));
+      coin_pices_list.push((Number(data[2]))/initPrice).toFixed(1);
       coin_date_list.push(time);
     }
     // const sd = 1.5;
@@ -112,7 +113,7 @@ const Chart = () => {
               datasets: dataset
             }}
             style={{ height: "100%", width: "100%" }}
-            options={{ responsive: true}}
+            options={{ responsive: true},{elements: { point: { radius: 0 } }}}
           />
         </ChartImage>
       </WelecomeView>

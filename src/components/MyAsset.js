@@ -61,7 +61,7 @@ const MyAsset = () => {
               datasets: dataset
             }}
             style={{ height: "100%", width: "100%" }}
-            options={{ responsive: true}}
+            options={{ responsive: true},{elements: { point: { radius: 0 } }}}
           />
         </ChartImage>
       </WelecomeView>
