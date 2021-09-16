@@ -1,8 +1,9 @@
 import React from 'react';
 import Welcome from './Welecome'
 import QuantLogic from './QuantLogic';
-import Chart from './Chart';
+import CoinChart from './CoinChart';
 import GilmuIndex from './GilmuIndex';
+import MyAsset from './MyAsset';
 import styled from 'styled-components';
 
 // const BackgrondOdd = styled.div`
@@ -22,13 +23,14 @@ const Main = () => {
     <div>
       <GilmuIndex/>
       {/* <BackgrondOdd> */}
-        <Welcome/>
+      <Welcome/>
       {/* </BackgrondOdd>
       <BackgrondEven> */}
-        <QuantLogic/>
+      <QuantLogic/>
       {/* </BackgrondOdd>
       <BackgrondEven> */}
-        <Chart/>
+      <CoinChart/>
+      <MyAsset/>
       {/* </BackgrondEven> */}
     </div>
   )
