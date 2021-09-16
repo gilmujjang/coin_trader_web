@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/master/static/css/main.355c9c36.chunk.css",
-    "main.js": "/master/static/js/main.280551d2.chunk.js",
-    "main.js.map": "/master/static/js/main.280551d2.chunk.js.map",
-    "runtime-main.js": "/master/static/js/runtime-main.a4848ad0.js",
-    "runtime-main.js.map": "/master/static/js/runtime-main.a4848ad0.js.map",
-    "static/js/2.e4c08815.chunk.js": "/master/static/js/2.e4c08815.chunk.js",
-    "static/js/2.e4c08815.chunk.js.map": "/master/static/js/2.e4c08815.chunk.js.map",
-    "index.html": "/master/index.html",
-    "static/css/main.355c9c36.chunk.css.map": "/master/static/css/main.355c9c36.chunk.css.map",
-    "static/js/2.e4c08815.chunk.js.LICENSE.txt": "/master/static/js/2.e4c08815.chunk.js.LICENSE.txt"
+    "main.css": "/coin_trader_web/static/css/main.355c9c36.chunk.css",
+    "main.js": "/coin_trader_web/static/js/main.280551d2.chunk.js",
+    "main.js.map": "/coin_trader_web/static/js/main.280551d2.chunk.js.map",
+    "runtime-main.js": "/coin_trader_web/static/js/runtime-main.d858291d.js",
+    "runtime-main.js.map": "/coin_trader_web/static/js/runtime-main.d858291d.js.map",
+    "static/js/2.5b79ac8b.chunk.js": "/coin_trader_web/static/js/2.5b79ac8b.chunk.js",
+    "static/js/2.5b79ac8b.chunk.js.map": "/coin_trader_web/static/js/2.5b79ac8b.chunk.js.map",
+    "index.html": "/coin_trader_web/index.html",
+    "static/css/main.355c9c36.chunk.css.map": "/coin_trader_web/static/css/main.355c9c36.chunk.css.map",
+    "static/js/2.5b79ac8b.chunk.js.LICENSE.txt": "/coin_trader_web/static/js/2.5b79ac8b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.a4848ad0.js",
-    "static/js/2.e4c08815.chunk.js",
+    "static/js/runtime-main.d858291d.js",
+    "static/js/2.5b79ac8b.chunk.js",
     "static/css/main.355c9c36.chunk.css",
     "static/js/main.280551d2.chunk.js"
   ]
