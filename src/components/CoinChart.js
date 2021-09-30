@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { Line } from 'react-chartjs-2'
 import request from 'request';
+import { dbService } from '../fbase';
 
 const WelecomeView = styled.div`
 color: black;
@@ -32,14 +33,15 @@ const ChartImage = styled.div`
 `;
 
 const Chart = () => {
-  const [targetCoin, setTargetCoin] = useState('BTC');
-  const [intervals, setIntervals] = useState('');
-  const [len, setLen] = useState(30);
-  const [coinPrice, setCoinPrice] = useState([]);
-  const [coinMa, setCoinMa] = useState([]);
-  const [coinUpper, setCoinUpper] = useState([]);
-  const [coinLower, setCoinLower] = useState([]);
+  const [showBtc, setShowBtc] = useState(true);
+  const [assets, setAssets] = useState([]);
+  const [btcPrice, setBtcPrice] = useState([]);
+  const [ethPrice, setEthPrice] = useState([]);
+  const [bnbPrice, setBnbPrice] = useState([]);
+  const [composePrice, setComposePrice] = useState([]);
   const [date, setDate] = useState([]);
+  const [intervals, setIntervals] = useState('');
+  const [len, setLen] = useState(70);
 
   function Unix_timestamp(t){
     const date = new Date(t);
@@ -67,8 +69,6 @@ const Chart = () => {
     const response_json = await response;
     const n = response_json["data"].length-1
     let coin_pices_list = [];
-    let coin_upper_list = [];
-    let coin_lower_list = [];
     let coin_date_list = [];
     const initPrice = response_json["data"][n-length][2];
     for(let i=length; i>0; i--){
@@ -77,32 +77,73 @@ const Chart = () => {
       coin_pices_list.push((Number(data[2]))/initPrice).toFixed(1);
       coin_date_list.push(time);
     }
-    // const sd = 1.5;
-    // const ma = 20;
-    // const Mean = Math.round(coin_pices_list.reduce((a,b) => a+b,0) / ma);
-    // const Std = Math.round(Math.sqrt(coin_pices_list.map(x => Math.pow(x - Mean,2)).reduce((a,b) => a+b)/ma))
-    // const bollinger_top = Mean + Std*sd;
-    // const high = Math.max(...coin_pices_list)
-    // const donkeyonBottom = high*0.9;
-    // const coinPrice = coin_pices_list[0]
-    // coinUpper();
-    setCoinPrice(coin_pices_list);
-    setDate(coin_date_list);
+    const reObj = {price : coin_pices_list, date : coin_date_list}
+    return reObj;
   }
 
   useEffect(() => {
-    candle_price(targetCoin,intervals,len);
-  },[targetCoin,intervals,len])
+    async function DataRenew(){
+      dbService.collection("balance").orderBy("time", "desc").limit(len).get().then(snapshot  => {
+        const snapshotReverse = snapshot.docs.reverse();
+        const initAsset = snapshotReverse[0].data().btc +snapshotReverse[0].data().eth+snapshotReverse[0].data().bnb+snapshotReverse[0].data().cash
+        snapshotReverse.map(doc => {
+          const totalMoney =( (doc.data().btc +  doc.data().eth+ doc.data().bnb+ doc.data().cash)/initAsset).toFixed(2);
+          setAssets(assets => [...assets, totalMoney])
+        })
+      })
+      const btcObj = await candle_price('BTC',intervals,len);
+      const ethObj = await candle_price('ETH',intervals,len);
+      const bnbObj = await candle_price('BNB',intervals,len);
+      const composePrice = btcObj.price.map((x,y) => (Number((x + ethObj.price[y] + bnbObj.price[y])/3).toFixed(2)));
+      setComposePrice(composePrice)
+      setBtcPrice(btcObj.price);
+      setEthPrice(ethObj.price);
+      setBnbPrice(bnbObj.price);
+      setDate(btcObj.date)
+    }
+    DataRenew();
+  },[intervals, len])
+
+  
   
   const dataset = [
     {
-      label: 'coin price',
-      data: coinPrice,
+      label: 'Gilmu',
+      data: assets,
       fill: false,
-      borderColor: 'rgb(50, 50, 50)',
+      borderColor: '#000000',
       tension: 0.1
-    }
-  ]
+    },
+    {
+      label: 'BTC+ETH_BNB',
+      data: composePrice,
+      fill: false,
+      borderColor: '#ff0000',
+      tension: 0.1
+    },
+    {
+      label: 'BTC',
+      data: btcPrice,
+      fill: false,
+      borderColor: '#ffd900',
+      tension: 0.1
+    },
+    {
+      label: 'ETH',
+      data: ethPrice,
+      fill: false,
+      borderColor: '#9c9c9c',
+      tension: 0.1
+    },
+    {
+      label: 'BNB',
+      data: bnbPrice,
+      fill: false,
+      borderColor: '#00aa00',
+      tension: 0.1
+    },
+  ];
+
   return(
       <WelecomeView className="chart">
         <Title>차트</Title>

@@ -33,7 +33,7 @@ const MyAsset = () => {
   const [date, setDate] = useState([]);
 
   useEffect(() => {
-    dbService.collection("balance").orderBy("time", "desc").limit(30).get().then(snapshot  => {
+    dbService.collection("balance").orderBy("time", "desc").limit(50).get().then(snapshot  => {
       const snapshotReverse = snapshot.docs.reverse();
       snapshotReverse.map(doc => {
         const totalMoney = doc.data().btc +  doc.data().eth+ doc.data().bnb+ doc.data().cash;
