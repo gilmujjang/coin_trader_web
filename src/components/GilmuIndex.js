@@ -39,12 +39,12 @@ const GilmuIndex = () => {
   useEffect(() => {
     dbService.collection("balance").orderBy("time", "asc").limit(1).get().then(snapshot  => {
       snapshot.docs.map(doc => {
-        setStart(doc.data().btc + doc.data().eth +doc.data().cash);
+        setStart(doc.data().btc + doc.data().eth + doc.data().bnb + doc.data().cash);
       })
     })
     dbService.collection("balance").orderBy("time", "desc").limit(1).get().then(snapshot  => {
       snapshot.docs.map(doc => {
-        setEnd(doc.data().btc + doc.data().eth +doc.data().cash);
+        setEnd(doc.data().btc + doc.data().eth + doc.data().bnb + doc.data().cash);
       })
     })
   },[])
