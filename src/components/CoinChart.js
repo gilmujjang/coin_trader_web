@@ -32,8 +32,21 @@ const ChartImage = styled.div`
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 
+const FlexBox = styled.div`
+  display: flex;
+`;
+
+const Checkbox = styled.div`
+  margin: 0px 8px;
+`;
+
 const Chart = () => {
-  const [showBtc, setShowBtc] = useState(true);
+  const [showbtc, setShowbtc] = useState(true);
+  const [showeth, setShoweth] = useState(false);
+  const [showbnb, setShowbnb] = useState(false);
+  const [showcomposite, setShowcomposite] = useState(false);
+  const [showgilmu, setShowgilmu] = useState(true);
+  const [dataset, setDataset] = useState();
   const [assets, setAssets] = useState([]);
   const [btcPrice, setBtcPrice] = useState([]);
   const [ethPrice, setEthPrice] = useState([]);
@@ -41,7 +54,114 @@ const Chart = () => {
   const [composePrice, setComposePrice] = useState([]);
   const [date, setDate] = useState([]);
   const [intervals, setIntervals] = useState('');
-  const [len, setLen] = useState(70);
+  const [len, setLen] = useState(100);
+
+  const gilmuindex ={
+    label: 'Gilmu',
+    data: assets,
+    fill: false,
+    borderColor: '#000000',
+    tension: 0.1
+  }
+    
+  const compositeindex =  {
+    label: 'BTC+ETH+BNB',
+    data: composePrice,
+    fill: false,
+    borderColor: '#ff0000',
+    tension: 0.1
+  }
+  
+  const btcindex = {
+    label: 'BTC',
+    data: btcPrice,
+    fill: false,
+    borderColor: '#ffd900',
+    tension: 0.1
+  }
+  
+  const ethindex =  {
+    label: 'ETH',
+    data: ethPrice,
+    fill: false,
+    borderColor: '#9c9c9c',
+    tension: 0.1
+  }
+  
+  const bnbindex ={
+    label: 'BNB',
+    data: bnbPrice,
+     fill: false,
+    borderColor: '#00aa00',
+    tension: 0.1
+  }
+
+  function showbtcClicked() {
+    setShowbtc(!showbtc)
+  }
+  
+  function showethClicked() {
+    setShoweth(!showeth)
+  }
+
+  function showbnbClicked() {
+    setShowbnb(!showbnb)
+  }
+
+  function showbcompositeClicked() {
+    setShowcomposite(!showcomposite)
+  }
+
+  function showgilmuClicked() {
+    setShowgilmu(!showgilmu)
+  }
+
+  useEffect(() => {
+    setDataset([gilmuindex, btcindex])
+  },[])
+
+  useEffect(() => {
+    const datasetSample = [];
+    if(showgilmu){
+      datasetSample.push(gilmuindex)
+    }
+    if(showcomposite){
+      datasetSample.push(compositeindex)
+    }
+    if(showbtc){
+      datasetSample.push(btcindex)
+    }
+    if(showeth){
+      datasetSample.push(ethindex)
+    }
+    if(showbnb){
+      datasetSample.push(bnbindex)
+    }
+    setDataset(datasetSample);
+  }, [showgilmu,showcomposite,showbtc,showeth,showbnb])
+
+  useEffect(() => {
+    async function DataRenew(){
+      dbService.collection("balance").orderBy("time", "desc").limit(len).get().then(snapshot  => {
+        const snapshotReverse = snapshot.docs.reverse();
+        const initAsset = snapshotReverse[0].data().btc +snapshotReverse[0].data().eth+snapshotReverse[0].data().bnb+snapshotReverse[0].data().cash
+        snapshotReverse.map(doc => {
+          const totalMoney = ((doc.data().btc +  doc.data().eth+ doc.data().bnb+ doc.data().cash)/initAsset).toFixed(2);
+          setAssets(assets => [...assets, totalMoney])
+        })
+      })
+      const btcObj = await candle_price('BTC',intervals,len);
+      const ethObj = await candle_price('ETH',intervals,len);
+      const bnbObj = await candle_price('BNB',intervals,len);
+      const composePrice = btcObj.price.map((x,y) => (Number((x + ethObj.price[y] + bnbObj.price[y])/3).toFixed(2)));
+      setComposePrice(composePrice)
+      setBtcPrice(btcObj.price);
+      setEthPrice(ethObj.price);
+      setBnbPrice(bnbObj.price);
+      setDate(btcObj.date)
+    }
+    DataRenew();
+  },[intervals, len])
 
   function Unix_timestamp(t){
     const date = new Date(t);
@@ -81,72 +201,31 @@ const Chart = () => {
     return reObj;
   }
 
-  useEffect(() => {
-    async function DataRenew(){
-      dbService.collection("balance").orderBy("time", "desc").limit(len).get().then(snapshot  => {
-        const snapshotReverse = snapshot.docs.reverse();
-        const initAsset = snapshotReverse[0].data().btc +snapshotReverse[0].data().eth+snapshotReverse[0].data().bnb+snapshotReverse[0].data().cash
-        snapshotReverse.map(doc => {
-          const totalMoney =( (doc.data().btc +  doc.data().eth+ doc.data().bnb+ doc.data().cash)/initAsset).toFixed(2);
-          setAssets(assets => [...assets, totalMoney])
-        })
-      })
-      const btcObj = await candle_price('BTC',intervals,len);
-      const ethObj = await candle_price('ETH',intervals,len);
-      const bnbObj = await candle_price('BNB',intervals,len);
-      const composePrice = btcObj.price.map((x,y) => (Number((x + ethObj.price[y] + bnbObj.price[y])/3).toFixed(2)));
-      setComposePrice(composePrice)
-      setBtcPrice(btcObj.price);
-      setEthPrice(ethObj.price);
-      setBnbPrice(bnbObj.price);
-      setDate(btcObj.date)
-    }
-    DataRenew();
-  },[intervals, len])
-
-  
-  
-  const dataset = [
-    {
-      label: 'Gilmu',
-      data: assets,
-      fill: false,
-      borderColor: '#000000',
-      tension: 0.1
-    },
-    {
-      label: 'BTC+ETH_BNB',
-      data: composePrice,
-      fill: false,
-      borderColor: '#ff0000',
-      tension: 0.1
-    },
-    {
-      label: 'BTC',
-      data: btcPrice,
-      fill: false,
-      borderColor: '#ffd900',
-      tension: 0.1
-    },
-    {
-      label: 'ETH',
-      data: ethPrice,
-      fill: false,
-      borderColor: '#9c9c9c',
-      tension: 0.1
-    },
-    {
-      label: 'BNB',
-      data: bnbPrice,
-      fill: false,
-      borderColor: '#00aa00',
-      tension: 0.1
-    },
-  ];
-
   return(
       <WelecomeView className="chart">
         <Title>차트</Title>
+        <FlexBox>
+          <Checkbox>
+          <input id="gilmu" type="checkbox"checked={showgilmu} onChange={showgilmuClicked}/>
+            <span>길무지수</span>
+          </Checkbox>
+          <Checkbox>
+          <input id="composite" type="checkbox"checked={showcomposite} onChange={showbcompositeClicked}/>
+            <span>비트코인+이더리움+바이낸스</span>
+          </Checkbox>
+          <Checkbox>
+            <input id="btc" type="checkbox"checked={showbtc} onChange={showbtcClicked}/>
+            <span>비트코인</span>
+          </Checkbox>
+          <Checkbox>
+          <input id="eth" type="checkbox"checked={showeth} onChange={showethClicked}/>
+            <span>이더리움</span>
+          </Checkbox>
+          <Checkbox>
+          <input id="bnb" type="checkbox"checked={showbnb} onChange={showbnbClicked}/>
+            <span>바이낸스</span>
+          </Checkbox>
+        </FlexBox>
         <ChartImage>
           <Line
             data={{
