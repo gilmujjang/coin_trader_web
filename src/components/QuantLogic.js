@@ -39,24 +39,13 @@ const DescriptionBox = styled.div`
 const QuantLogic = () => {
   return(
       <WelecomeView className="quantLogic">
-        <Title>투자전략</Title>
         <div>
-          <Title>볼린저밴드</Title>
+          <Title>볼린저밴드 & 돈키언추세 혼합전략</Title>
           <DescriptionBox>
-            <Description>N 기간 동안의 이동편균 MA에 표준편차의 K배 더하거나 빼서 상단과 하단선을 그린 밴드 이다.</Description>
-            <Description>표준편차를 이용하기 때문에 변동성이 높은 장세에서는 더 보수적인 판단을 한다.</Description>
+            <Description>매수시점은 20일 이동평균선 표준편차 1.5를 기준으로한 볼린저 밴드 상단선을 이용하고 </Description>
+            <Description>매도시점은 고가에서 10%하락한 돈키언 추세 하단선을 이용합니다.</Description>
+            <Description>논문링크</Description>
           </DescriptionBox>
-          <ChartImage src="images/chart.png" alt="some chart"/>
-          <ChartDescription>최근 60일 동안의 비트코인의 볼린저밴드</ChartDescription>
-          <Title>돈키언추세</Title>
-          <DescriptionBox>
-            <Description>N 기간 동안의 고가와 저가가 각각 채널의 상단과 하단을 그린 밴드 이다.</Description>
-            <Description>표준편차를 이용하기 때문에 변동성이 높은 장세에서는 더 보수적인 판단을 한다.</Description>
-          </DescriptionBox>
-          <ChartImage src="images/chart.png" alt="some chart"/>
-          <ChartDescription>최근 60일 동안의 비트코인의 돈키언채널</ChartDescription>
-          <Title>섞어 쓰는 이유</Title>
-          <Description>~~~ 이러해서 좋다</Description>
         </div>
       </WelecomeView>
   )

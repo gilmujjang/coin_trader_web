@@ -36,27 +36,14 @@ const TextBox = styled.div`
   margin-top: 4rem;
 `;
 
-const LogoBox = styled.div`
-  width: 24rem;
-`;
-
-const BithumbLogo = styled.img`
-  width: 18rem;
-`;
 
 const Welcome = () => {
   return(
       <WelecomeView className="welcome">
-        <FlexBox>
-          <TextBox>
-            <Text1>가상화폐 투자 봇</Text1>
-            <Text2>가상화폐 투자 봇인 길무봇의 투자결과를 모니터링 하는 사이트 입니다</Text2>
-          </TextBox>
-          <LogoBox>
-            <BithumbLogo src="images/bithumb.png" alt="bithumb logo"/>
-            <Text2>근데 빗썸을 곁들인</Text2>
-          </LogoBox>
-        </FlexBox>
+        <TextBox>
+          <Text1>가상화폐 투자 봇</Text1>
+          <Text2>가상화폐 투자 봇인 길무봇의 투자결과를 모니터링 하는 사이트 입니다</Text2>
+        </TextBox>
       </WelecomeView>
   )
 }

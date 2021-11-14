@@ -203,9 +203,6 @@ const Chart = () => {
     setDataset(datasetSample);
   }, [showgilmu,showcomposite,showbtc,showeth,showbnb, btcPrice, assets])
 
-  console.log(dataset);
-  console.log(assets)
-
   return(
       <WelecomeView className="chart">
         <Title>차트</Title>
