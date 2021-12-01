@@ -2,17 +2,6 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { dbService } from '../fbase';
 
-const WelecomeView = styled.div`
-color: black;
-width: 100vw;
-height: calc(100vh - 5rem);
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-text-align: center;
-`;
-
 const Text1 = styled.div`
   font-size: 4rem;
   font-weight: 500;
@@ -70,7 +59,7 @@ const GilmuIndex = () => {
 
   const index = ((end/start)*100).toFixed(1)
   return(
-      <WelecomeView className="welcome">
+      <>
         <FlexBox>
           <TextBox>
               <Text1>가상화폐 투자 봇</Text1>
@@ -81,7 +70,7 @@ const GilmuIndex = () => {
               <Index>{index}</Index>
             </TextBox>
         </FlexBox>
-      </WelecomeView>
+      </>
   )
 }
 

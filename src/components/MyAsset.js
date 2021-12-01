@@ -3,18 +3,6 @@ import styled from 'styled-components';
 import { dbService } from '../fbase';
 import { Doughnut } from 'react-chartjs-2'
 
-const WelecomeView = styled.div`
-color: black;
-margin-top: 10rem;
-display: flex;
-height: 100vh;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-text-align: center;
-font-family: 'Do Hyeon', sans-serif;
-`;
-
 const Title = styled.p`
   margin: 3rem;
   font-size: 4rem;
@@ -58,16 +46,16 @@ const MyAsset = () => {
       }]
     };
   return(
-      <WelecomeView className="chart">
-        <Title>보유현황</Title>
-        <ChartImage>
-          <Doughnut
-            data={data} 
-            style={{ height: "100%", width: "100%" }}
-            options={{ responsive: true},{elements: { point: { radius: 0 } }}}
-          />
-        </ChartImage>
-      </WelecomeView>
+    <>
+      <Title>보유현황</Title>
+      <ChartImage>
+        <Doughnut
+          data={data} 
+          style={{ height: "100%", width: "100%" }}
+          options={{ responsive: true},{elements: { point: { radius: 0 } }}}
+        />
+      </ChartImage>
+    </>
   )
 }
 

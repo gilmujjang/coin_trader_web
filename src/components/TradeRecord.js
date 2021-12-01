@@ -1,19 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { dbService } from '../fbase';
-import { Doughnut } from 'react-chartjs-2'
-
-const WelecomeView = styled.div`
-color: black;
-margin-top: 10rem;
-display: flex;
-height: 100vh;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-text-align: center;
-font-family: 'Do Hyeon', sans-serif;
-`;
 
 const Title = styled.p`
   margin: 3rem;
@@ -88,12 +75,12 @@ const TradeRecord = () => {
   }
 
   return(
-      <WelecomeView className="chart">
+      <>
         <Title>거래기록</Title>
         {trade.map(data => (
           <TradeCard data={data}/>
         ))}
-      </WelecomeView>
+      </>
   )
 }
 

@@ -4,18 +4,6 @@ import { Line } from 'react-chartjs-2'
 import request from 'request';
 import { dbService } from '../fbase';
 
-const WelecomeView = styled.div`
-color: black;
-margin-top: 10rem;
-display: flex;
-height: 100vh;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-text-align: center;
-font-family: 'Do Hyeon', sans-serif;
-`;
-
 const Title = styled.p`
   margin: 3rem;
   font-size: 4rem;
@@ -204,7 +192,7 @@ const Chart = () => {
   }, [showgilmu,showcomposite,showbtc,showeth,showbnb, btcPrice, assets])
 
   return(
-      <WelecomeView className="chart">
+      <>
         <Title>차트</Title>
         <FlexBox>
           <Checkbox>
@@ -238,7 +226,7 @@ const Chart = () => {
             options={{ responsive: true},{elements: { point: { radius: 0 } }}}
           />
         </ChartImage>
-      </WelecomeView>
+      </>
   )
 }
 

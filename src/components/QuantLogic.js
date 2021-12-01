@@ -1,25 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const WelecomeView = styled.div`
-color: black;
-margin-top: 10rem;
-width: 100vw;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-font-family: 'Do Hyeon', sans-serif;
-`;
-
-const ChartImage = styled.img`
-  width: 48rem;
-  height: 24rem;
-  padding: 1rem;
-  background-color: #eee;
-  border-radius: 0.8rem;
-`;
-
 const Title = styled.div`
   font-size: 3rem;
   padding-top: 3rem;
@@ -29,16 +10,12 @@ const Description = styled.p`
   font-size: 1.5rem;
 `;
 
-const ChartDescription = styled.p`
-  font-size: 1rem;
-`;
-
 const DescriptionBox = styled.div`
 `;
 
 const QuantLogic = () => {
   return(
-      <WelecomeView className="quantLogic">
+      <>
         <div>
           <Title>볼린저밴드 & 돈키언추세 혼합전략</Title>
           <DescriptionBox>
@@ -47,7 +24,7 @@ const QuantLogic = () => {
             <Description>논문링크</Description>
           </DescriptionBox>
         </div>
-      </WelecomeView>
+      </>
   )
 }
 
