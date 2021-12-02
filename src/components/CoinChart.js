@@ -197,7 +197,7 @@ const Chart = () => {
       datasetSample.push(bnbindex)
     }
     setDataset(datasetSample);
-  }, [showgilmu,showcomposite,showbtc,showeth,showbnb, btcPrice, assets])
+  }, [showgilmu, showcomposite, showbtc, showeth, showbnb, btcPrice, assets])
 
   return(
       <WhiteBox>

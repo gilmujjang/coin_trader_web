@@ -98,7 +98,7 @@ const TradeRecord = () => {
       <WhiteBox>
         <Title>거래기록</Title>
         {trade.map(data => (
-          <TradeCard data={data}/>
+          <TradeCard data={data} keuy={data.order_date}/>
         ))}
       </WhiteBox>
   )

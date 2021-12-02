@@ -32,7 +32,7 @@ const Main = () => {
         <QuantLogic/>
       </DefaultBox>
       <DefaultBox>
-        {/* <CoinChart/> */}
+        <CoinChart/>
       </DefaultBox>
       <DefaultBox>
         <MyAsset/>
