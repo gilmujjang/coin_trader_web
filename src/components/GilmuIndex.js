@@ -64,6 +64,7 @@ const GilmuIndex = () => {
           <TextBox>
               <Text1>가상화폐 투자 봇</Text1>
               <Text2>가상화폐 투자 봇인 길무봇의 투자결과를 모니터링 하는 사이트 입니다</Text2>
+              <Text2>길무지수는 길무봇의 (투자결과/초기자금)*100 입니다.</Text2>
             </TextBox>
             <TextBox>
               <Text1>길무지수</Text1>

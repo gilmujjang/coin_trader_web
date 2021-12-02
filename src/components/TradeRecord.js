@@ -9,7 +9,6 @@ const Title = styled.p`
 
 const Card = styled.div`
   margin: 1.5rem;
-  padding: 1rem;
   border-radius: 0.5rem;
   background-color: ${props =>
     props.type === 'ask' ? 'rgba(18,99,206,0.7)' : 'rgba(206,17,23,0.7)'}
@@ -26,8 +25,8 @@ const CardBody = styled.div`
   justify-content: space-between;
 `;
 
-const Box = styled.div`
-  width: 12rem;
+const PaddingBox = styled.div`
+  padding: 12px;
 `;
 
 const TradeRecord = () => {
@@ -54,21 +53,29 @@ const TradeRecord = () => {
   }
   
   const TradeCard = (data) => {
-    console.log(data.data)
-    const time = Unix_timestamp(Number(data.data.order_date.substring(0,13)))
+    const trade_data = data.data;
+    console.log(trade_data);
+    const money = trade_data.contract.reduce((money_sum, current_money) => {
+      return money_sum + Number(current_money.total);
+    }, 0);
+    const fee = trade_data.contract.reduce((fee_sum, current_fee) => {
+      return fee_sum + Number(current_fee.fee);
+    }, 0);
+    const time = Unix_timestamp(Number(trade_data.order_date.substring(0,13)))
     return(
-      <Card type={data.data.type}>
+      <Card type={trade_data.type}>
         <CardHeader>
-          <div>{data.data.order_currency}</div>
-          <Box/>
-          {data.data.type === 'ask' ? (
-            <div>매도</div>
+          <PaddingBox>{time}</PaddingBox>
+          <PaddingBox>{trade_data.order_currency}</PaddingBox>
+          {trade_data.type === 'ask' ? (
+            <PaddingBox>매도</PaddingBox>
           ):(
-            <div>매수</div>
+            <PaddingBox>매수</PaddingBox>
           )}
         </CardHeader>
         <CardBody>
-          <div>{time}</div>
+          <PaddingBox>금액: {money}</PaddingBox>
+          <PaddingBox>수수료: {Math.ceil(fee)}</PaddingBox>
         </CardBody>
       </Card>
     )

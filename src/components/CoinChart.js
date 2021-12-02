@@ -193,7 +193,7 @@ const Chart = () => {
 
   return(
       <>
-        <Title>차트</Title>
+        <Title>길무지수 차트</Title>
         <FlexBox>
           <Checkbox>
           <input id="gilmu" type="checkbox"checked={showgilmu} onChange={showgilmuClicked}/>
