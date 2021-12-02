@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { dbService } from '../fbase';
 
 const Title = styled.p`
-  margin: 3rem;
+  margin: 0 0 3rem 0;
   font-size: 4rem;
 `;
 
 const Card = styled.div`
-  margin: 1.5rem;
+  margin: 3rem;
   border-radius: 0.5rem;
   background-color: ${props =>
     props.type === 'ask' ? 'rgba(18,99,206,0.7)' : 'rgba(206,17,23,0.7)'}
@@ -27,6 +27,14 @@ const CardBody = styled.div`
 
 const PaddingBox = styled.div`
   padding: 12px;
+`;
+
+const WhiteBox = styled.div`
+  padding: 2.5rem 2rem 2rem 2rem;
+  background-color: white;
+  border-radius: 2rem;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  margin-bottom: 3rem;
 `;
 
 const TradeRecord = () => {
@@ -50,6 +58,12 @@ const TradeRecord = () => {
     const hour = "0" + date.getHours();
     const minute = "0" + date.getMinutes();
     return year + "년" + month.substr(-2) + "월" + day.substr(-2) + "일 " + hour.substr(-2) +"시 "+ minute.substr(-2)+"분";
+  }
+
+  function CommaMaker(num){
+    const result = num; // 뒤에서부터 3글자마다 ,추가하는 로직
+
+    return result;
   }
   
   const TradeCard = (data) => {
@@ -82,12 +96,12 @@ const TradeRecord = () => {
   }
 
   return(
-      <>
+      <WhiteBox>
         <Title>거래기록</Title>
         {trade.map(data => (
           <TradeCard data={data}/>
         ))}
-      </>
+      </WhiteBox>
   )
 }
 

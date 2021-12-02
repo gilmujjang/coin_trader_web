@@ -5,7 +5,7 @@ import request from 'request';
 import { dbService } from '../fbase';
 
 const Title = styled.p`
-  margin: 3rem;
+  margin: 0 0 2rem 0;
   font-size: 4rem;
 `;
 
@@ -27,6 +27,14 @@ const FlexBox = styled.div`
 const Checkbox = styled.div`
   margin: 0px 8px;
 `;
+
+const WhiteBox = styled.div`
+  padding: 2.5rem 2rem 2rem 2rem;
+  background-color: white;
+  border-radius: 2rem;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+`;
+
 
 const Chart = () => {
   const [showbtc, setShowbtc] = useState(true);
@@ -192,7 +200,7 @@ const Chart = () => {
   }, [showgilmu,showcomposite,showbtc,showeth,showbnb, btcPrice, assets])
 
   return(
-      <>
+      <WhiteBox>
         <Title>길무지수 차트</Title>
         <FlexBox>
           <Checkbox>
@@ -226,7 +234,7 @@ const Chart = () => {
             options={{ responsive: true},{elements: { point: { radius: 0 } }}}
           />
         </ChartImage>
-      </>
+      </WhiteBox>
   )
 }
 

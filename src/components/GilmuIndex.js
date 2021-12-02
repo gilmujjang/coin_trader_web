@@ -6,7 +6,6 @@ const Text1 = styled.div`
   font-size: 4rem;
   font-weight: 500;
   font-family: 'Do Hyeon', sans-serif;
-  margin: 2rem;
 `;
 
 const Index = styled.div`
@@ -26,19 +25,12 @@ const FlexBox = styled.div`
   align-items: center;
   background-color: white;
   border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 
 const TextBox = styled.div`
-  width: 32rem;
-  margin-top: 4rem;
-`;
-
-const LogoBox = styled.div`
-  width: 24rem;
-`;
-
-const BithumbLogo = styled.img`
-  width: 18rem;
+  padding: 2rem;
 `;
 
 const GilmuIndex = () => {

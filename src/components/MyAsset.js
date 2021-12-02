@@ -4,7 +4,7 @@ import { dbService } from '../fbase';
 import { Doughnut } from 'react-chartjs-2'
 
 const Title = styled.p`
-  margin: 3rem;
+  margin: 0 0 3rem 0;
   font-size: 4rem;
 `;
 
@@ -16,6 +16,12 @@ const ChartImage = styled.div`
   align-items: center;
   width: 36rem;
   padding: 1rem;
+`;
+
+const WhiteBox = styled.div`
+  padding: 2.5rem 2rem 2rem 2rem;
+  background-color: white;
+  border-radius: 2rem;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 
@@ -46,7 +52,7 @@ const MyAsset = () => {
       }]
     };
   return(
-    <>
+    <WhiteBox>
       <Title>보유현황</Title>
       <ChartImage>
         <Doughnut
@@ -55,7 +61,7 @@ const MyAsset = () => {
           options={{ responsive: true},{elements: { point: { radius: 0 } }}}
         />
       </ChartImage>
-    </>
+    </WhiteBox>
   )
 }
 

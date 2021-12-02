@@ -18,9 +18,13 @@ const DefaultBox = styled.div`
   font-family: 'Do Hyeon', sans-serif;
 `;
 
+const BackgoundColor = styled.div`
+  background-color: rgb(250,249,250);
+`;
+
 const Main = () => {
   return(
-    <div>
+    <BackgoundColor>
       <DefaultBox>
         <GilmuIndex/>
       </DefaultBox>
@@ -36,7 +40,7 @@ const Main = () => {
       <DefaultBox>
         <TradeRecord/>
       </DefaultBox>
-    </div>
+    </BackgoundColor>
   )
 }
 
