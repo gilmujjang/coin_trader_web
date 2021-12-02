@@ -68,7 +68,6 @@ const TradeRecord = () => {
   
   const TradeCard = (data) => {
     const trade_data = data.data;
-    console.log(trade_data);
     const money = trade_data.contract.reduce((money_sum, current_money) => {
       return money_sum + Number(current_money.total);
     }, 0);
