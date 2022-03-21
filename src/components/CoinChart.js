@@ -93,8 +93,23 @@ const Chart = () => {
     let coin_pices_list = [];
     let coin_date_list = [];
     const initPrice = response_json["data"][n - length][2];
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+
+    const endDate = new Date(year, month, day);
+    const startDate = new Date(2021, 12, 28);
+
+    const btMs = endDate.getTime() - startDate.getTime();
+    let spread = 198;
+    if (btMs / (1000 * 60 * 60 * 24) < 198) {
+      spread = btMs / (1000 * 60 * 60 * 24);
+    }
+    console.log(spread);
+
     for (let i = length; i > 0; i--) {
-      const data = response_json["data"][n - i];
+      const data = response_json["data"][n - i - spread];
       const time = Unix_timestamp(Number(data[0]));
       coin_pices_list.push(Number(data[2]) / initPrice).toFixed(1);
       coin_date_list.push(time);
